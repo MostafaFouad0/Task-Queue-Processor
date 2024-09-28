@@ -14,6 +14,6 @@ func init() {
 func main() {
 
 	r := gin.Default()
-	r.GET("/", controllerls.AddTask)
+	r.POST("/task", controllerls.AddTask)
 	r.Run()
 }
