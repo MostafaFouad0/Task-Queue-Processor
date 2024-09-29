@@ -3,6 +3,7 @@ package controllerls
 import (
 	"fmt"
 	"os"
+	"runtime"
 	"sync"
 
 	"github.com/MostafaFouad0/Task-Queue-Processor/initializers"
@@ -13,9 +14,15 @@ import (
 
 var taskQueue = make(chan models.Task, 100) // Buffered channel as a task queue
 var wg sync.WaitGroup
+var numCPU int = runtime.NumCPU()
 
 func init() {
-	for i := 1; i <= 3; i++ {
+	numCPU -= 1
+	if numCPU < 1 {
+		numCPU = 1
+	}
+	fmt.Printf("Making %v Goroutines.\n", numCPU)
+	for i := 1; i <= numCPU; i++ {
 		go worker(i)
 	}
 }
@@ -45,6 +52,23 @@ func AddTask(c *gin.Context) {
 	EnqueueTask(task)
 }
 
+func GetTask(c *gin.Context) {
+	ID := c.Param("id")
+	var task models.Task
+	result := initializers.DB.First(&task, ID)
+	if result.Error != nil {
+		c.JSON(404, gin.H{
+			"message": "Task not found",
+			"error":   result.Error,
+		})
+		return
+	}
+	c.JSON(200, gin.H{
+		"status": task.Status,
+	})
+
+}
+
 func worker(id int) {
 	for task := range taskQueue {
 		flag := false
@@ -60,9 +84,9 @@ func worker(id int) {
 		m.SetBody("text/html", fmt.Sprintf("<p> %v</p>", task.Body))
 		d := gomail.NewDialer("smtp.gmail.com", 587, os.Getenv("FROM"), os.Getenv("PASSWORD"))
 
-		// Retry 3 times before failing
+		// Retry 5 times before failing
 
-		for i := 0; i < 3; i++ {
+		for i := 0; i < 5; i++ {
 			if err := d.DialAndSend(m); err != nil {
 				fmt.Printf("Error happend with worker number %v --- error : %v\n", id, err)
 			} else {
