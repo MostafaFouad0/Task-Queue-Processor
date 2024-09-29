@@ -6,7 +6,7 @@ Task Queue Processor is a Go-based backend service that allows users to submit t
 
 ## Features
 
-- Task Submission API: Submit tasks such as sending emails, processing images, or making API calls.
+- Task Submission API: Submit tasks such as sending emails, processing images, or making API calls, in this project we are just sending Emails
 - Worker Pool: Concurrency with worker goroutines that process tasks from a queue.
 - Task Status Management: Monitor task status (e.g., pending, in-progress, Ok, failed) with real-time updates.
 - Retry Mechanism: Automatically retry failed tasks up to a configurable limit.
