@@ -18,6 +18,38 @@ Task Queue Processor is a Go-based backend service that allows users to submit t
 - API Framework: Gin Web Framework
 - Database: PostgreSQL
 
+## Endpoints
+**1 - GET /task/:id**
+
+Retrieve the status of a task by its ID.
+
+### Request
+
+- Method `GET`
+- URL `/task/{id}`
+### Path Parameters
+| Parameter | Type   | Description               |
+|-----------|--------|---------------------------|
+| `id`      | `String` | `Unique ID of the task `     |
+
+### Response
+- Status Code :`200 OK`
+- Body : `JSON object containing the task status.`
+
+**2 - POST /task/**
+
+Submit a new task to the queue for processing.
+
+### Request
+
+- Method `POST`
+- URL `/task/`
+- Body `JSON object containing the task data to be processed.`
+
+### Response
+- Status Code :`201 Created`
+- Body : `JSON object containing the task ID if submission is successful`
+
 ## Contributing
 
 Feel free to contribute by submitting pull requests, reporting issues, or suggesting features!
