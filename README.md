@@ -38,7 +38,12 @@ Retrieve the status of a task by its ID.
 ### Response
 
 - Status Code :`200 OK`
-- Body : `JSON object containing the task status.`
+- Body : `JSON object containing the task status. [Pending in-progress Ok Failed]`
+
+````JSON
+{
+    "status": "Ok",
+}
 
 **2 - POST /task/**
 
@@ -56,7 +61,7 @@ Submit a new task to the queue for processing.
     "subject":"Test Subject",
     "body":"Test E-Mail Body"
 }
-```
+````
 
 ### Response
 
