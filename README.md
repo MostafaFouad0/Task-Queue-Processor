@@ -50,10 +50,25 @@ Submit a new task to the queue for processing.
 - URL `/task/`
 - Body `JSON object containing the task data to be processed.`
 
+```JSON
+{
+    "To":"example@gmail.com",
+    "subject":"Test Subject",
+    "body":"Test E-Mail Body"
+}
+```
+
 ### Response
 
 - Status Code :`201 Created`
 - Body : `JSON object containing the task ID if submission is successful`
+
+```JSON
+{
+    "message": "Task Created",
+	"id":      12
+}
+```
 
 ## Database Schema
 
