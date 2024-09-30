@@ -80,6 +80,18 @@ Submit a new task to the queue for processing.
 
 ![Schema](https://i.ibb.co/j6LPmX6/table.png)
 
+## environment variables
+
+Please make sure to configure theses environment variables in .env file
+
+```
+PORT 
+DB_URL [your connection string]
+FROM [email that you will use to send Emails]
+PASSWORD [password for this email]
+```
+
+
 ## Contributing
 
 Feel free to contribute by submitting pull requests, reporting issues, or suggesting features!
